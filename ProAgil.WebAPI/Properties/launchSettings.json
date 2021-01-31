@@ -1,16 +1,11 @@
-﻿{
+{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-<<<<<<< HEAD
-      "applicationUrl": "http://localhost:20606",
-      "sslPort": 44320
-=======
       "applicationUrl": "http://localhost:1272",
       "sslPort": 44376
->>>>>>> 88e21c4ea2c92bc13574e3fbcb8ca571917b17fd
     }
   },
   "profiles": {
@@ -24,15 +19,9 @@
     },
     "ProAgil.WebAPI": {
       "commandName": "Project",
-<<<<<<< HEAD
-      "launchBrowser": false,
-      "launchUrl": "api/values",
-      "applicationUrl": "http://localhost:5000",
-=======
       "launchBrowser": true,
       "launchUrl": "api/values",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
->>>>>>> 88e21c4ea2c92bc13574e3fbcb8ca571917b17fd
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

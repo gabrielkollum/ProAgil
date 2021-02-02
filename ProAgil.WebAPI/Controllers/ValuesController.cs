@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-<<<<<<< HEAD
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ProAgil.WebAPI.Data;
-using ProAgil.WebAPI.Model;
+using ProAgil.Repository;
+
 
 namespace ProAgil.WebAPI.Controllers
 {
@@ -15,9 +14,9 @@ namespace ProAgil.WebAPI.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        public readonly DataContext _context;
+        public readonly ProAgilContext _context;
 
-        public ValuesController(DataContext context)
+        public ValuesController(ProAgilContext context)
         {
             _context = context;
 
@@ -38,31 +37,15 @@ namespace ProAgil.WebAPI.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de Dados Falhou! :(");
             }
-=======
-using Microsoft.AspNetCore.Mvc;
-
-namespace ProAgil.WebAPI.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ValuesController : ControllerBase
-    {
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "value1", "value2" };
->>>>>>> 88e21c4ea2c92bc13574e3fbcb8ca571917b17fd
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-<<<<<<< HEAD
         public async Task<IActionResult> Get(int id)
         {
             try
             {
-                var results = await _context.Eventos.FirstOrDefaultAsync(x => x.EventoId == id);
+                var results = await _context.Eventos.FirstOrDefaultAsync(x => x.Id == id);
 
                 return Ok(results);
 
@@ -71,11 +54,6 @@ namespace ProAgil.WebAPI.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de Dados Falhou! :(");
             }
-=======
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
->>>>>>> 88e21c4ea2c92bc13574e3fbcb8ca571917b17fd
         }
 
         // POST api/values

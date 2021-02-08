@@ -5,23 +5,24 @@ namespace ProAgil.Repository
 {
     public interface IProAgilRepository
     {
-         void Add<T>(T entity) where T : class;
-         
-         void Delete<T>(T entity) where T : class;
-         
-         void Update<T>(T entity) where T : class;
-         
-         Task<bool> SaveChangesAsync();
+        void Add<T>(T entity) where T : class;
 
-         //EVENTOS
+        void Delete<T>(T entity) where T : class;
 
-         Task<Evento[]> GetAllEventoAsyncByTema(string tema, bool includePalestrantes);
-         Task<Evento[]> GetAllEventoAsync(bool includePalestrantes);
-         Task<Evento> GetAllEventoAsyncById(int EventoId, bool includePalestrantes);
+        void Update<T>(T entity) where T : class;
 
-         //PALESTRANTES
-         Task<Palestrante[]> GetAllPalestranteAsync(int PalestranteId,bool includeEventos);
-         Task<Palestrante> GetAllPalestranteAsyncByName(string name, bool includeEventos);
+        Task<bool> SaveChangesAsync();
+
+        //EVENTOS
+
+        Task<Evento[]> GetAllEventoAsyncByTema(string tema, bool includePalestrantes);
+        Task<Evento[]> GetAllEventoAsync(bool includePalestrantes);
+        Task<Evento> GetAllEventoAsyncById(int EventoId, bool includePalestrantes);
+
+        //PALESTRANTES
+        Task<Palestrante[]> GetAllPalestranteAsync(bool includeEventos);
+        Task<Palestrante> GetAllPalestranteAsyncByName(string name, bool includeEventos);
+        Task<Palestrante> GetAllPalestranteAsyncById(int PalestranteId, bool includeEventos);
 
     }
 }

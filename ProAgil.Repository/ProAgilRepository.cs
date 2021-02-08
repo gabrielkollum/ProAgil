@@ -12,9 +12,10 @@ namespace ProAgil.Repository
         public ProAgilRepository(ProAgilContext context)
         {
             _context = context;
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
 
-        //GERAIS
+            //GERAIS
         }
 
         public void Add<T>(T entity) where T : class
@@ -52,7 +53,7 @@ namespace ProAgil.Repository
             }
 
             query = query.AsNoTracking()
-                .OrderByDescending( c => c.DataEvento)
+                .OrderByDescending(c => c.DataEvento)
                 .Where(c => c.Tema.ToLower().Contains(tema.ToLower()));
 
             return await query.ToArrayAsync();
@@ -98,7 +99,9 @@ namespace ProAgil.Repository
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<Palestrante[]> GetAllPalestranteAsync(int PalestranteId, bool includeEventos)
+        //PALESTRANTE
+
+        public async Task<Palestrante[]> GetAllPalestranteAsync(bool includeEventos)
         {
             IQueryable<Palestrante> query = _context.Palestrantes
                 .Include(p => p.RedesSociais);
@@ -112,8 +115,7 @@ namespace ProAgil.Repository
             }
 
             query = query.AsNoTracking()
-                .OrderBy(c => c.Nome)
-                .Where(p => p.Id == PalestranteId);
+                .OrderBy(c => c.Nome);
 
             return await query.ToArrayAsync();
         }
@@ -137,5 +139,24 @@ namespace ProAgil.Repository
 
             return await query.FirstOrDefaultAsync();
         }
+
+        public async Task<Palestrante> GetAllPalestranteAsyncById(int PalestranteId, bool includeEventos)
+        {
+            IQueryable<Palestrante> query = _context.Palestrantes
+                .Include(p => p.RedesSociais);
+
+            if (includeEventos)
+            {
+                query = query
+                    .Include(pe => pe.PalestrantesEventos)
+                    .ThenInclude(p => p.Evento);
+            }
+
+            query = query.AsNoTracking()
+                .Where(e => e.Id == PalestranteId);
+
+            return await query.FirstOrDefaultAsync();
         }
+
     }
+}
